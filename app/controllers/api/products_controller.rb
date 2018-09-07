@@ -1,6 +1,21 @@
 class Api::ProductsController < ApplicationController
   def index
+    search_term = params[:search]
+    sort_attribute = params[:sort]
+    sort_order = params[:sort_order]
+
     @products = Product.all
+
+    if search_term
+      @products = @products.where("name iLIKE ?", "%#{search_term}%")
+    end
+
+    if sort_order && sort_attribute
+      @products = @products.order(sort_attribute => sort_order)
+    elsif sort_attribute
+      @products = @products.order(sort_attribute)
+    end 
+
     render 'index.json.jbuilder'
   end
 
