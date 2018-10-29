@@ -23,4 +23,12 @@ class Product < ApplicationRecord
   def total
     price + tax
   end
+
+  def default_image_url
+    if images.any?
+      images.first.url
+    else
+      "https://vignette.wikia.nocookie.net/dragonballfanon/images/7/70/Random.png/revision/latest?cb=20161221030547"
+    end
+  end
 end

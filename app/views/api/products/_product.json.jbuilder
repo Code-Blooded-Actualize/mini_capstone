@@ -9,6 +9,8 @@ json.images do
   json.array! product.images, partial: 'api/images/image', as: :image
 end
 
+json.default_image_url product.default_image_url
+
 json.discounted product.is_discounted?
 
 json.formatted do 
